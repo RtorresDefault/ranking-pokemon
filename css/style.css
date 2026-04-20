@@ -272,10 +272,23 @@ tr:hover {
 .page-btn {
     padding: 8px 12px;
     min-width: 40px;
+    background: var(--card);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn:hover {
+    background: var(--hover);
+    border-color: var(--accent);
 }
 
 .page-active {
     background: var(--accent) !important;
+    color: white !important;
+    border-color: var(--accent) !important;
 }
 
 @media (max-width: 768px) {
