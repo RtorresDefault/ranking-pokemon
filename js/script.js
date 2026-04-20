@@ -1,42 +1,36 @@
-// DADOS INICIAIS (pode importar CSV para substituir)
-const players = [
-  {
-    position: 1,
-    player: "João Silva",
-    points: 120,
-    wins: 12,
-    fidelidade: "5/8",
-  },
-  {
-    position: 2,
-    player: "Maria Oliveira",
-    points: 115,
-    wins: 11,
-    fidelidade: "4/8",
-  },
-  {
-    position: 3,
-    player: "Pedro Santos",
-    points: 110,
-    wins: 11,
-    fidelidade: "6/8",
-  },
-  {
-    position: 4,
-    player: "Ana Costa",
-    points: 105,
-    wins: 10,
-    fidelidade: "3/8",
-  },
-  {
-    position: 5,
-    player: "Lucas Ferreira",
-    points: 100,
-    wins: 10,
-    fidelidade: "7/8",
-  },
-  { position: 6, player: "Zé Novato", points: 10, wins: 2, fidelidade: "1/8" },
-];
+// DADOS INICIAIS (carregado do CSV)
+let players = [];
+
+// Carregar dados do CSV
+async function loadCSVData() {
+  try {
+    const response = await fetch('data.csv');
+    const text = await response.text();
+    const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+    const headers = lines[0].split(',');
+    
+    players = lines.slice(1).map((line, index) => {
+      const values = line.split(',');
+      return {
+        position: index + 1,
+        player: values[0]?.trim() || 'Sem nome',
+        points: parseInt(values[1]) || 0,
+        wins: 0,
+        fidelidade: `${values[2] || 0}/${values[3] || 0}`
+      };
+    });
+
+    // Ordenar por pontos (decrescente)
+    players.sort((a, b) => b.points - a.points);
+    players.forEach((p, i) => p.position = i + 1);
+
+    return true;
+  } catch (e) {
+    console.error('Erro ao carregar CSV:', e);
+    return false;
+  }
+}
+
 
 const STORAGE_KEY = "rankingPokemonData";
 
@@ -78,9 +72,13 @@ function runIntroIfFirstVisit() {
 }
 
 // Inicializar
-function init() {
+async function init() {
   runIntroIfFirstVisit();
   loadTheme();
+  const csvLoaded = await loadCSVData();
+  if (!csvLoaded) {
+    console.warn('Erro ao carregar CSV, usando dados vazios');
+  }
   loadFromStorage();
   currentData = [...players];
   renderTable();
@@ -196,17 +194,6 @@ function setupEventListeners() {
     renderTable();
     updateStats();
   });
-
-  document.getElementById("sortSelect").addEventListener("change", (e) => {
-    const colMap = {
-      position: 0,
-      player: 1,
-      points: 2,
-      wins: 3,
-      fidelidade: 4,
-    };
-    sortTable(colMap[e.target.value]);
-  });
 }
 
 // Estatísticas
@@ -228,77 +215,6 @@ function updateStats() {
   );
 
   document.getElementById("topFidelidade").textContent = top.fidelidade;
-}
-
-// Exportar CSV
-function exportCSV() {
-  const csv = ["Posição,Jogador,Pontos,Vitórias,Fidelidade"]
-    .concat(
-      currentData.map(
-        (row) =>
-          `${row.position},"${row.player}",${row.points},${row.wins},"${row.fidelidade}"`,
-      ),
-    )
-    .join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `ranking-pokemon-recife-${new Date().toISOString().slice(0, 10)}.csv`;
-  a.click();
-}
-
-// Importar CSV
-function importCSV() {
-  const fileInput = document.getElementById("csvFile");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Selecione um arquivo CSV primeiro!");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function (e) {
-    const text = e.target.result;
-    const lines = text
-      .split("\n")
-      .map((l) => l.trim())
-      .filter((l) => l);
-
-    const dataLines = lines.slice(1);
-
-    const importedPlayers = dataLines.map((line, index) => {
-      const values = line.split(",");
-
-      const player = values[0]?.replace(/"/g, "").trim() || "Sem nome";
-      const points = parseInt(values[1]) || 0;
-      const monthly = parseInt(values[2]) || 0;
-      const total = parseInt(values[3]) || 0;
-      const qualified = parseInt(values[4]) || 0;
-      const fidelidade = `${monthly}/${total}`;
-      const position = index + 1;
-
-      return { position, player, points, wins: qualified, fidelidade };
-    });
-
-    players.length = 0;
-    players.push(...importedPlayers);
-
-    currentData = [...players];
-    currentPage = 1;
-    saveToStorage();
-
-    renderTable();
-    updateStats();
-
-    alert("CSV importado com sucesso!");
-  };
-
-  reader.readAsText(file, "UTF-8");
 }
 
 // Tema Dark Mode

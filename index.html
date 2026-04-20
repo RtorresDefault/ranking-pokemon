@@ -89,20 +89,10 @@
     </section>
 
     <div class="controls">
-        <input type="text" id="search" placeholder="🔍 Buscar jogador..." />
-
-        <select id="sortSelect">
-            <option value="position">Posição</option>
-            <option value="player">Jogador</option>
-            <option value="points">Pontos</option>
-            <option value="wins">Vitórias</option>
-            <option value="fidelidade">Fidelidade</option>
-        </select>
-
-        <input type="file" id="csvFile" accept=".csv" />
-        <button onclick="importCSV()">📥 Importar CSV</button>
-
-        <button onclick="exportCSV()">📊 Exportar CSV</button>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar jogador..." />
+            <span class="search-icon">🔍</span>
+        </div>
     </div>
 
     <div class="stats">
@@ -127,11 +117,6 @@
     </div>
 
     <div class="pagination" id="pagination"></div>
-
-    <footer>
-        <p>Contato: <a href="mailto:pokemonrecife@example.com">pokemonrecife@example.com</a> | 
-        <a href="#">Regras completas</a> | Desenvolvido com ❤️ para a comunidade Pokémon Recife</p>
-    </footer>
 
     <script src="js/script.js"></script>
 </body>
