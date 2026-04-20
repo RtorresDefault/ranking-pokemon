@@ -302,15 +302,25 @@ function importCSV() {
 }
 
 // Tema Dark Mode
+function setThemeButton() {
+  const themeButton = document.querySelector('.theme-toggle');
+  if (!themeButton) return;
+  const isDark = document.body.dataset.theme === 'dark';
+  themeButton.textContent = isDark ? '☀️' : '🌙';
+  themeButton.title = isDark ? 'Ativar modo claro' : 'Ativar modo escuro';
+}
+
 function toggleTheme() {
-  const isDark = document.body.dataset.theme === "dark";
-  document.body.dataset.theme = isDark ? "" : "dark";
-  localStorage.setItem("rankingPokemonTheme", isDark ? "" : "dark");
+  const isDark = document.body.dataset.theme === 'dark';
+  document.body.dataset.theme = isDark ? '' : 'dark';
+  localStorage.setItem('rankingPokemonTheme', isDark ? '' : 'dark');
+  setThemeButton();
 }
 
 function loadTheme() {
-  const saved = localStorage.getItem("rankingPokemonTheme");
+  const saved = localStorage.getItem('rankingPokemonTheme');
   if (saved) document.body.dataset.theme = saved;
+  setThemeButton();
 }
 
 // Atualizar data automaticamente

@@ -21,7 +21,73 @@
     </div>
 
     <div class="header">
-        <h1>🏆 Ranking 2026 - Pokémon Recife</h1>
+        <div class="header-top">
+            <h1>🏆 Ranking 2026 - Pokémon Recife</h1>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">🌙</button>
+        </div>
+        <p class="header-meta">Ranking oficial Pokémon TCG Recife | <span id="lastUpdate">Atualizado: 2024-12-01</span></p>
+    </div>
+
+    <section class="info-section">
+        <div class="info-header">
+            <h2>Como funcionam os rankings</h2>
+            <p>Regras, critérios de desempate e premiações para o Ranking Mensal e o Ranking de Fidelidade.</p>
+        </div>
+
+        <div class="cards-grid">
+            <article class="info-card card-monthly">
+                <h3>Ranking Mensal</h3>
+                <p class="card-intro">Somam-se os resultados de todas as ligas semanais do mês. Vence quem fizer mais pontos.</p>
+                <div class="card-block">
+                    <strong>Critérios de desempate</strong>
+                    <ol>
+                        <li>Quantidade de participações nas ligas mensais.</li>
+                        <li>Quantidade de participações totais ao longo do ano.</li>
+                        <li>Ordem alfabética.</li>
+                    </ol>
+                </div>
+                <div class="card-block">
+                    <strong>Premiação</strong>
+                    <ul>
+                        <li>🏆 Campeão - Vaga direta para o Spell Fest, 100% de desconto nas ligas semanais e +50% em Spell Points sobre todo crédito recebido.</li>
+                        <li>🥈 Vice - 50% de desconto nas ligas semanais e +30% em Spell Points sobre todo crédito recebido.</li>
+                        <li>🎖️ Top 4 - 25% de desconto nas ligas semanais e +15% em Spell Points sobre todo crédito recebido.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="info-card card-loyalty">
+                <h3>Ranking de Fidelidade</h3>
+                <p class="card-intro">Somam-se todas as participações em ligas semanais do mês. Vence quem tiver mais presenças.</p>
+                <div class="card-block">
+                    <strong>Critérios de desempate</strong>
+                    <ol>
+                        <li>Maior pontuação total no Ranking Mensal.</li>
+                        <li>Quantidade de participações totais ao longo do ano.</li>
+                        <li>Ordem alfabética.</li>
+                    </ol>
+                </div>
+                <div class="card-block">
+                    <strong>Premiação</strong>
+                    <ul>
+                        <li>🏆 Campeão - Vaga direta para o Spell Fest, R$ 100 em Spell Points e 2 boosters.</li>
+                        <li>🥈 Vice - R$ 60 em Spell Points e 1 booster.</li>
+                        <li>🎖️ Top 4 - R$ 40 em Spell Points e 1 booster.</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+
+        <div class="observations">
+            <h3>Observações</h3>
+            <ol>
+                <li>Não é possível ser premiado no Ranking Mensal e no Ranking de Fidelidade ao mesmo tempo. Os rankings foram criados para atrair tanto o público competitivo quanto o público que prefere jogar apenas por diversão.</li>
+                <li>Caso os jogadores do Top 4 do Ranking Mensal sejam os mesmos do Top 4 do Ranking de Fidelidade, eles receberão apenas a premiação do Ranking Mensal, e a premiação do Ranking de Fidelidade será repassada do 5º ao 8º colocado.</li>
+                <li>Caso um jogador que já possua vaga para o Spell Fest vença novamente em algum dos rankings, a vaga será repassada ao próximo jogador melhor colocado naquele mesmo ranking. Se o próximo jogador também já possuir vaga, o processo se repete até que a vaga seja destinada ao jogador melhor colocado que ainda não a possua.</li>
+            </ol>
+        </div>
+    </section>
+
         <p>Ranking oficial Pokémon TCG Recife | <span id="lastUpdate">Atualizado: 2024-12-01</span></p>
     </div>
 
@@ -40,7 +106,6 @@
         <button onclick="importCSV()">📥 Importar CSV</button>
 
         <button onclick="exportCSV()">📊 Exportar CSV</button>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
     </div>
 
     <div class="stats">
@@ -73,5 +138,4 @@
 
     <script src="js/script.js"></script>
 </body>
-</html>
 </html>
