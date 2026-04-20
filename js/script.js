@@ -233,6 +233,20 @@ function toggleTheme() {
   setThemeButton();
 }
 
+function toggleInfo() {
+  const content = document.getElementById('infoContent');
+  const button = document.querySelector('.info-toggle');
+  const isExpanded = content.classList.contains('expanded');
+  
+  if (isExpanded) {
+    content.classList.remove('expanded');
+    button.classList.add('rotated');
+  } else {
+    content.classList.add('expanded');
+    button.classList.add('rotated');
+  }
+}
+
 function loadTheme() {
   const saved = localStorage.getItem('rankingPokemonTheme');
   if (saved) document.body.dataset.theme = saved;

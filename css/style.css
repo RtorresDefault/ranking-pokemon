@@ -319,6 +319,7 @@ tr:hover {
 .info-header {
     text-align: center;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .info-header h2 {
@@ -327,10 +328,49 @@ tr:hover {
     color: var(--accent);
 }
 
+.info-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s;
+    color: var(--text);
+}
+
+.info-toggle:hover {
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.info-toggle.rotated {
+    transform: rotate(180deg);
+}
+
 .info-header p {
     margin: 12px auto 0;
     max-width: 720px;
     color: var(--muted);
+}
+
+.info-content {
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    max-height: 0;
+    opacity: 0;
+}
+
+.info-content.expanded {
+    max-height: 2000px;
+    opacity: 1;
 }
 
 .cards-grid {

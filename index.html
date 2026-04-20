@@ -31,10 +31,11 @@
     <section class="info-section">
         <div class="info-header">
             <h2>Como funcionam os rankings</h2>
+            <button class="info-toggle" onclick="toggleInfo()" aria-label="Expandir/recolher informações">▼</button>
             <p>Regras, critérios de desempate e premiações para o Ranking Mensal e o Ranking de Fidelidade.</p>
         </div>
 
-        <div class="cards-grid">
+        <div class="info-content" id="infoContent">
             <article class="info-card card-monthly">
                 <h3>Ranking Mensal</h3>
                 <p class="card-intro">Somam-se os resultados de todas as ligas semanais do mês. Vence quem fizer mais pontos.</p>
@@ -85,6 +86,7 @@
                 <li>Caso os jogadores do Top 4 do Ranking Mensal sejam os mesmos do Top 4 do Ranking de Fidelidade, eles receberão apenas a premiação do Ranking Mensal, e a premiação do Ranking de Fidelidade será repassada do 5º ao 8º colocado.</li>
                 <li>Caso um jogador que já possua vaga para o Spell Fest vença novamente em algum dos rankings, a vaga será repassada ao próximo jogador melhor colocado naquele mesmo ranking. Se o próximo jogador também já possuir vaga, o processo se repete até que a vaga seja destinada ao jogador melhor colocado que ainda não a possua.</li>
             </ol>
+        </div>
         </div>
     </section>
 
