@@ -189,3 +189,82 @@ footer {
     border-top: 1px solid #ddd;
     color: #666;
 }
+
+/* ── Pokébola Intro ── */
+#pokeIntro {
+    position: fixed;
+    inset: 0;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: introFadeOut 0.5s ease 2.4s forwards;
+}
+
+#pokeIntro.hidden {
+    display: none;
+}
+
+@keyframes introFadeOut {
+    to { opacity: 0; pointer-events: none; }
+}
+
+.pokeball {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.6);
+    animation: pokeShake 0.4s ease 1.2s 2 alternate, pokeOpen 0.3s ease 2s forwards;
+}
+
+@keyframes pokeShake {
+    from { transform: rotate(-15deg); }
+    to   { transform: rotate(15deg); }
+}
+
+@keyframes pokeOpen {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.3); }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+.pokeball-top {
+    height: 50%;
+    background: #ff1a1a;
+}
+
+.pokeball-bottom {
+    height: 50%;
+    background: white;
+}
+
+.pokeball-middle {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    height: 16px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pokeball-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 5px solid #222;
+    box-shadow: 0 0 0 4px white;
+    animation: btnGlow 0.6s ease 1.2s infinite alternate;
+}
+
+@keyframes btnGlow {
+    from { box-shadow: 0 0 0 4px white; }
+    to   { box-shadow: 0 0 12px 4px #ffdd57; }
+}
